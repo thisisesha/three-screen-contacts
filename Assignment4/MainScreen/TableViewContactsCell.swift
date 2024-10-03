@@ -43,12 +43,16 @@ class TableViewContactsCell: UITableViewCell {
     
     func setupWrapperCellView(){
         wrapperCellView = UITableViewCell()
+        wrapperCellView.layer.borderColor = UIColor.gray.cgColor
+        wrapperCellView.layer.borderWidth = 1
+        wrapperCellView.layer.cornerRadius = 8
         wrapperCellView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(wrapperCellView)
     }
         
     func setupLabelName(){
         labelName = UILabel()
+        labelName.font = UIFont.boldSystemFont(ofSize: 20)
         labelName.translatesAutoresizingMaskIntoConstraints = false
         wrapperCellView.addSubview(labelName)
     }

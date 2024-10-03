@@ -21,6 +21,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         title = "My Contacts"
         
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+            tapRecognizer.cancelsTouchesInView = false
+            view.addGestureRecognizer(tapRecognizer)
+        
+        mainScreen.tableViewContacts.register(TableViewContactsCell.self, forCellReuseIdentifier: "contacts")
+        
         mainScreen.tableViewContacts.dataSource = self
         mainScreen.tableViewContacts.delegate = self
         
@@ -29,13 +35,37 @@ class ViewController: UIViewController {
             action: #selector(onAddBarButtonTapped)
         )
         
+        let customBackButton = UIBarButtonItem()
+        customBackButton.title = "My Contacts"
+        navigationItem.backBarButtonItem = customBackButton
+        
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let indexPath = mainScreen.tableViewContacts.indexPathForSelectedRow {
+            mainScreen.tableViewContacts.deselectRow(at: indexPath, animated: true)
+        }
+    }
+    
+    @objc func hideKeyboardOnTap(){
+        view.endEditing(true)
+    }
+    
     
     @objc func onAddBarButtonTapped(){
         let addContactController = AddNewContactViewController()
         addContactController.delegate = self
         navigationController?.pushViewController(addContactController, animated: true)
     }
+    
+    
+    func delegateOnAddContact(contact: Contact){
+        contacts.append(contact)
+        mainScreen.tableViewContacts.reloadData()
+    }
+    
 
 }
 
@@ -52,6 +82,15 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
             cell.labelPhone.text = uwPhone + " (" + uwType + ")"
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedContact = contacts[indexPath.row]
+                
+        let detailsViewController = DetailsViewController()
+        detailsViewController.contact = selectedContact
+                
+        navigationController?.pushViewController(detailsViewController, animated: true)
     }
     
 }

@@ -39,7 +39,6 @@ class AddNewContactView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     func setUpNameTextField() {
         nameTextField = UITextField()
         nameTextField.placeholder = "Name"
@@ -47,7 +46,8 @@ class AddNewContactView: UIView {
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(nameTextField)
     }
-    
+
+
     func setUpEmailTextField() {
         emailTextField = UITextField()
         emailTextField.placeholder = "Email"
@@ -114,7 +114,7 @@ class AddNewContactView: UIView {
                 
             
             nameTextField.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
-            nameTextField.topAnchor.constraint(equalTo: self.bottomAnchor, constant: 16),
+            nameTextField.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
             nameTextField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
             nameTextField.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -24),
             
