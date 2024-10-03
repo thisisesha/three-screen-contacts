@@ -18,7 +18,8 @@ class MainScreenView: UIView {
             
         setupTableViewContacts()
         initConstraints()
-        }
+        
+    }
         
     func setupTableViewContacts(){
         tableViewContacts = UITableView()
@@ -39,7 +40,5 @@ class MainScreenView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 
 }

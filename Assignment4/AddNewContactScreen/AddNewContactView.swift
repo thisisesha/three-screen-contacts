@@ -112,7 +112,6 @@ class AddNewContactView: UIView {
         
         NSLayoutConstraint.activate([
                 
-            
             nameTextField.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             nameTextField.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
             nameTextField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
@@ -152,7 +151,6 @@ class AddNewContactView: UIView {
             zipTextField.topAnchor.constraint(equalTo: cityTextField.bottomAnchor, constant: 16),
             zipTextField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 24),
             zipTextField.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -24),
-            
                 
         ])
     }

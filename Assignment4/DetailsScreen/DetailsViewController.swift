@@ -22,17 +22,10 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         title = "Contact Details"
      
-        if let contact = contact {
-            detailsScreen.nameLabel.text = "\(contact.name ?? "")"
-            detailsScreen.emailLabel.text = "Email: \(contact.email ?? "")"
-            detailsScreen.phnoLabel.text = "Phone: \(contact.phone ?? "") (\(contact.typeOfPhone ?? ""))"
-            
-            
+        self.view.backgroundColor = .white
                 
-         //   detailsScreen.addressLabel.attributedText = attributedText
-            detailsScreen.addressLabel.text = "Address: \(contact.address ?? "")"
-            detailsScreen.cityLabel.text = "\(contact.city ?? "")"
-            detailsScreen.zipLabel.text = "\(contact.zip ?? "")"
+        if let contact = contact {
+            detailsScreen.configure(with: contact)
         }
     }
     

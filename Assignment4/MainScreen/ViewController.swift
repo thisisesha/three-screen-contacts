@@ -21,12 +21,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         title = "My Contacts"
         
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
-            tapRecognizer.cancelsTouchesInView = false
-            view.addGestureRecognizer(tapRecognizer)
-        
+        mainScreen.tableViewContacts.separatorStyle = .none
         mainScreen.tableViewContacts.register(TableViewContactsCell.self, forCellReuseIdentifier: "contacts")
-        
         mainScreen.tableViewContacts.dataSource = self
         mainScreen.tableViewContacts.delegate = self
         
@@ -49,10 +45,6 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func hideKeyboardOnTap(){
-        view.endEditing(true)
-    }
-    
     
     @objc func onAddBarButtonTapped(){
         let addContactController = AddNewContactViewController()
@@ -70,15 +62,22 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource{
+    func numberOfSections(in tableView: UITableView) -> Int {
+            return 1
+        }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contacts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contacts", for: indexPath) as! TableViewContactsCell
-        cell.labelName.text = contacts[indexPath.row].name
-        cell.labelEmail.text = contacts[indexPath.row].email
-        if let uwPhone = contacts[indexPath.row].phone, let uwType = contacts[indexPath.row].typeOfPhone {
+        
+        let contact = contacts[indexPath.row]
+        
+        cell.labelName.text = contact.name
+        cell.labelEmail.text = contact.email
+        if let uwPhone = contact.phone, let uwType = contact.typeOfPhone {
             cell.labelPhone.text = uwPhone + " (" + uwType + ")"
         }
         return cell
@@ -92,6 +91,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource{
                 
         navigationController?.pushViewController(detailsViewController, animated: true)
     }
-    
+
 }
 

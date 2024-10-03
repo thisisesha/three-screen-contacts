@@ -12,6 +12,7 @@ class DetailsView: UIView {
     var nameLabel : UILabel!
     var emailLabel : UILabel!
     var phnoLabel : UILabel!
+    var addressTitleLabel: UILabel!
     var addressLabel : UILabel!
     var cityLabel : UILabel!
     var zipLabel : UILabel!
@@ -24,6 +25,7 @@ class DetailsView: UIView {
         setUpNameLabel()
         setUpEmailLabel()
         setUpPhoneLabel()
+        setUpAddressTitleLabel()
         setUpAddressLabel()
         setUpCityLabel()
         setUpZipLabel()
@@ -38,7 +40,7 @@ class DetailsView: UIView {
     
     func setUpNameLabel() {
         nameLabel = UILabel()
-        nameLabel.font = nameLabel.font.withSize(18)
+        nameLabel.font = UIFont.boldSystemFont(ofSize: 22)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(nameLabel)
     }
@@ -57,9 +59,18 @@ class DetailsView: UIView {
         self.addSubview(phnoLabel)
     }
     
+    func setUpAddressTitleLabel() {
+        addressTitleLabel = UILabel()
+        addressTitleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        addressTitleLabel.textAlignment = .center
+        addressTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(addressTitleLabel)
+    }
+    
     func setUpAddressLabel() {
         addressLabel = UILabel()
-        addressLabel.font = addressLabel.font.withSize(18)
+        addressLabel.font = addressLabel.font.withSize(19)
+        addressLabel.numberOfLines = 0
         addressLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(addressLabel)
     }
@@ -80,25 +91,39 @@ class DetailsView: UIView {
     
     func initConstraints() {
         NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            nameLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
             nameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 18),
             
-            emailLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            emailLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor, constant: 36),
+            emailLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 100),
+            emailLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor, constant: 50),
             
-            phnoLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            phnoLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 100),
             phnoLabel.topAnchor.constraint(equalTo: emailLabel.topAnchor, constant: 36),
             
-            addressLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            addressLabel.topAnchor.constraint(equalTo: phnoLabel.topAnchor, constant: 36),
+            addressTitleLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            addressTitleLabel.topAnchor.constraint(equalTo: phnoLabel.topAnchor, constant: 36),
             
-            cityLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            cityLabel.topAnchor.constraint(equalTo: addressLabel.topAnchor, constant: 36),
+            addressLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            addressLabel.topAnchor.constraint(equalTo: addressTitleLabel.topAnchor, constant: 24),
             
-            zipLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            zipLabel.topAnchor.constraint(equalTo: cityLabel.topAnchor, constant: 36),
+            cityLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            cityLabel.topAnchor.constraint(equalTo: addressLabel.topAnchor, constant: 24),
+            
+            zipLabel.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
+            zipLabel.topAnchor.constraint(equalTo: cityLabel.topAnchor, constant: 24),
             
         ])
+    }
+    
+    func configure(with contact: Contact) {
+        nameLabel.text = contact.name
+        emailLabel.text = "Email: \(contact.email ?? "No email found")"
+        phnoLabel.text = "Phone: \(contact.phone ?? "No phone found") (\(contact.typeOfPhone ?? "No type found"))"
+        
+        addressTitleLabel.text = "Address:"
+        addressLabel.text = "\(contact.address ?? "No address found")"
+        cityLabel.text = "\(contact.city ?? "No city found")"
+        zipLabel.text = "\(contact.zip ?? "No zip found")"
     }
 
 }

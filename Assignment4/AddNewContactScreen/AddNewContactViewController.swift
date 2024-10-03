@@ -20,6 +20,16 @@ class AddNewContactViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Add a New Contact"
+        
+        let attribute: [NSAttributedString.Key: Any] = [
+                .font: UIFont.systemFont(ofSize: 20), 
+            ]
+            
+        navigationController?.navigationBar.titleTextAttributes = attribute
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardOnTap))
+        tapRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapRecognizer)
 
         addContactScreen.phoneType.delegate = self
         addContactScreen.phoneType.dataSource = self
@@ -28,6 +38,19 @@ class AddNewContactViewController: UIViewController {
             barButtonSystemItem: .save, target: self,
             action: #selector(onSaveBarButtonTapped)
         )
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.navigationBar.titleTextAttributes = [
+            .font: UIFont.systemFont(ofSize: 17)
+        ]
+    }
+    
+    @objc func hideKeyboardOnTap(){
+        view.endEditing(true)
     }
     
     @objc func onSaveBarButtonTapped(){
@@ -171,7 +194,6 @@ extension AddNewContactViewController: UIPickerViewDelegate, UIPickerViewDataSou
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        //MARK: we are displaying the options from Utilities.types...
         return Utilities.typesOfPhones.count
     }
     

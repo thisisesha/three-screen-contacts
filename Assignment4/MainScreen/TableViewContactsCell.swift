@@ -32,13 +32,12 @@ class TableViewContactsCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
     func setupWrapperCellView(){
@@ -71,10 +70,10 @@ class TableViewContactsCell: UITableViewCell {
         
     func initConstraints(){
         NSLayoutConstraint.activate([
-            wrapperCellView.topAnchor.constraint(equalTo: self.topAnchor),
-            wrapperCellView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            wrapperCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            wrapperCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            wrapperCellView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            wrapperCellView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            wrapperCellView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+            wrapperCellView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
                 
             labelName.topAnchor.constraint(equalTo: wrapperCellView.topAnchor, constant: 4),
             labelName.leadingAnchor.constraint(equalTo: wrapperCellView.leadingAnchor, constant: 4),
